@@ -11,17 +11,11 @@ import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../State/t
 export type TaskPropsType = {
   task: ObjectType
   todoListId: string
-  // removeTasks: (taskId: string) => void
-  // changeTaskTitle: (taskId: string, newValue: string) => void
-  // changeStatus: (taskId: string,newStatusValue: boolean) => void
 }
 
 export const Task = React.memo(({
                                   task,
                                   todoListId,
-                                  // removeTasks,
-                                  // changeStatus,
-                                  // changeTaskTitle,
                                 }: TaskPropsType) => {
 
   const dispatch = useDispatch()

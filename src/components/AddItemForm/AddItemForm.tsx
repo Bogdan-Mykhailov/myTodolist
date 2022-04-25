@@ -3,7 +3,7 @@ import classes from "../Todolist/Todolist.module.css";
 import Button from '@mui/material/Button';
 import {TextField} from "@mui/material";
 
-type AddItemFormPropsType = {
+export type AddItemFormPropsType = {
   addItem: (title: string) => void
 }
 

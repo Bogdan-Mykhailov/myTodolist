@@ -48,21 +48,9 @@ export function AppWithRedux() {
     dispatch(changeTodolistFilterAC(todoListId, value))
   }, [dispatch])
 
-  // const removeTasks = useCallback((todoListId: string, id: string) => {
-  //   dispatch(removeTaskAC(todoListId, id))
-  // }, [dispatch])
-
   const addTask = useCallback((todoListId: string, title: string) => {
     dispatch(addTaskAC(todoListId, title))
   }, [dispatch])
-
-  // const changeStatus = useCallback((todoListId: string, taskId: string, isDone: boolean) => {
-  //   dispatch(changeTaskStatusAC(todoListId, taskId, isDone))
-  // }, [dispatch])
-  //
-  // const changeTaskTitle = useCallback((todoListId: string, taskId: string, newTitle: string) => {
-  //   dispatch(changeTaskTitleAC(todoListId, taskId, newTitle))
-  // }, [dispatch])
 
   return (
     <div>
@@ -93,14 +81,11 @@ export function AppWithRedux() {
                     title={tl.title}
                     id={tl.id}
                     tasks={tasks[tl.id]}
-                    // removeTasks={removeTasks}
                     addTask={addTask}
-                    // changeStatus={changeStatus}
                     changeFilter={changeFilter}
                     filter={tl.filter}
                     removeTodoLists={removeTodoLists}
                     changeTodolistTitleHandler={changeTodolistTitleHandler}
-                    // changeTaskTitle={changeTaskTitle}
                   />
                 </Paper>
               </Grid>
