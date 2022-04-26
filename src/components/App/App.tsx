@@ -1,18 +1,18 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {ObjectType, Todolist} from "./components/Todolist/Todolist";
-import {AddItemForm} from "./components/AddItemForm/AddItemForm";
-import {ButtonAppBar} from "./components/ButtonAppBar/ButtonAppBar";
+import {ObjectType, Todolist} from "../Todolist/Todolist";
+import {AddItemForm} from "../AddItemForm/AddItemForm";
+import {ButtonAppBar} from "../ButtonAppBar/ButtonAppBar";
 import {Container, Grid, Paper} from "@mui/material";
 import {
   addTodolistAC,
   changeTodolistFilterAC,
   changeTodolistTitleAC,
   removeTodolistAC,
-} from "./State/todolist-reducer";
-import {addTaskAC} from "./State/tasks-reducer";
+} from "../../State/todolist-reducer";
+import {addTaskAC} from "../../State/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "./State/Store";
+import {AppRootStateType} from "../../State/Store";
 
 export type FilterValueType = 'all' | 'active' | 'completed'
 export type TodolistType = {
@@ -24,7 +24,7 @@ export type TasksStateType = {
   [key: string]: ObjectType[]
 }
 
-export function AppWithRedux() {
+export function App() {
 
   const todoLists = useSelector<AppRootStateType, TodolistType[]>(state => state.todoLists);
   const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks);
@@ -67,7 +67,7 @@ export function AppWithRedux() {
               <Grid item key={tl.id}>
                 <Paper
                   style={{
-                    maxWidth: '265px',
+                    maxWidth: '244px',
                     wordWrap: 'break-word',
                     padding: '20px',
                     fontFamily: 'Museo Sans Cyrl',

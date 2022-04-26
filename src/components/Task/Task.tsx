@@ -38,10 +38,6 @@ export const Task = React.memo(({
   return (
     <div key={task.id}
          className={task.isDone ? classes.isDone : ''}>
-
-      <IconButton aria-label="delete" onClick={onClickRemoveTasksButtonHandler}>
-        <DeleteIcon sx={{color: '#F2E7AC'}}/>
-      </IconButton>
       <Checkbox {...label}
                 checked={task.isDone}
                 onChange={changeStatusHandler}
@@ -49,6 +45,9 @@ export const Task = React.memo(({
                 color='default'
                 sx={{color: '#F2E7AC'}}/>
       <EditableSpan title={task.title} onChange={changeTitleHandler}/>
+      <IconButton aria-label="delete" onClick={onClickRemoveTasksButtonHandler}>
+        <DeleteIcon sx={{color: '#F2E7AC'}}/>
+      </IconButton>
     </div>
   );
 });

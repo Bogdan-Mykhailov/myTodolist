@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {FilterValueType} from "../../App";
+import {FilterValueType} from '../App/App'
 import classes from './Todolist.module.css'
 import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
@@ -17,10 +17,7 @@ type TodolistPropsType = {
   id: string
   title: string,
   tasks: ObjectType[]
-  // removeTasks: (todoListId: string, id: string) => void
   addTask: (todoListId: string, title: string) => void
-  // changeStatus: (todoListId: string, taskId: string, isDone: boolean) => void
-  // changeTaskTitle: (todoListId: string, taskId: string, newValue: string) => void
   changeFilter: (todoListId: string, filter: FilterValueType) => void
   filter: FilterValueType
   removeTodoLists: (todoListId: string) => void
@@ -54,18 +51,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
   if (props.filter === 'completed') {
     tasksFiltered = tasksFiltered.filter(i => i.isDone)
   }
-
-  // const changeTaskTitle = useCallback((taskId: string, newTitle: string) => {
-  //   props.changeTaskTitle(props.id, taskId, newTitle)
-  // }, [props.changeTaskTitle, props.id])
-  //
-  // const changeStatus = useCallback((taskId: string, newStatusValue: boolean) => {
-  //   props.changeStatus(props.id, taskId, newStatusValue)
-  // }, [props.changeStatus, props.id])
-  //
-  // const removeTasks = useCallback((taskId: string) => {
-  //   props.removeTasks(props.id, taskId)
-  // }, [props.removeTasks, props.id])
 
   return (
     <div>

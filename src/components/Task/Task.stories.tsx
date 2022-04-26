@@ -1,33 +1,26 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {action} from "@storybook/addon-actions";
+import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {Task} from "./Task";
-import {ReduxStoreProviderDecorator} from "../../stories/ReduxStoreProviderDecorator";
+import {ReduxStoreProviderDecorator} from "../../State/ReduxStoreProviderDecorator";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../../State/Store";
+import {ObjectType} from "../Todolist/Todolist";
 
 export default {
   title: 'Todolist/Task',
   component: Task,
-  args: {
-    changeStatusHandler: action('changeTaskStatus'),
-    changeTitleHandler: action('changeTaskTitle'),
-    onClickRemoveTasksButtonHandler: action('removeTask')
-  },
+  args: {},
   decorators: [ReduxStoreProviderDecorator]
 
 } as ComponentMeta<typeof Task>;
 
-const Template: ComponentStory<typeof Task> = (args) => <Task {...args} />;
+const TaskUsingRedux = () => {
+  const task = useSelector<AppRootStateType, ObjectType>(state => state.tasks['todoListId1'][3])
+  return <Task task={task} todoListId={'todoListId1'}/>
+}
+
+const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux  />;
 
 export const TaskIsDoneStory = Template.bind({});
 
-TaskIsDoneStory.args = {
-  task: {id: 'Bogdan', title: 'Frontend dev', isDone: true},
-  todoListId: 'todoListId'
-}
-
-export const TaskIsNotDoneStory = Template.bind({});
-
-TaskIsNotDoneStory.args = {
-  task: {id: 'Bogdan', title: 'Frontend dev', isDone: false},
-  todoListId: 'todoListId'
-}
+TaskIsDoneStory.args = {}
