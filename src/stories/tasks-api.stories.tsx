@@ -41,6 +41,7 @@ export const DeleteTask = () => {
   }, [])
   return <div> {JSON.stringify(state)}</div>
 }
+
 export const UpdateTask = () => {
   const [state, setState] = useState<any>(null)
   useEffect(() => {
