@@ -1,5 +1,4 @@
 import React, {ChangeEvent, useCallback} from 'react';
-import {ObjectType} from "../Todolist/Todolist";
 import classes from "../Todolist/Todolist.module.css";
 import {IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -7,9 +6,10 @@ import Checkbox from "@mui/material/Checkbox";
 import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {useDispatch} from "react-redux";
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../State/tasks-reducer";
+import {TaskStatuses, TaskType} from "../../api/tasks-api";
 
 export type TaskPropsType = {
-  task: ObjectType
+  task: TaskType
   todoListId: string
 }
 
@@ -24,7 +24,7 @@ export const Task = React.memo(({
 
   const changeStatusHandler = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     let newStatusValue = event.currentTarget.checked
-    dispatch(changeTaskStatusAC(todoListId, task.id, newStatusValue))
+    dispatch(changeTaskStatusAC(todoListId, task.id, newStatusValue? TaskStatuses.Completed : TaskStatuses.New))
   }, [dispatch])
 
   const changeTitleHandler = (newValue: string) => {
@@ -37,9 +37,9 @@ export const Task = React.memo(({
 
   return (
     <div key={task.id}
-         className={task.isDone ? classes.isDone : ''}>
+         className={task.status === TaskStatuses.Completed ? classes.isDone : ''}>
       <Checkbox {...label}
-                checked={task.isDone}
+                checked={task.status === TaskStatuses.Completed}
                 onChange={changeStatusHandler}
                 size="small"
                 color='default'

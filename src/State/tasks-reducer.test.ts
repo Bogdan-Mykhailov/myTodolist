@@ -1,29 +1,24 @@
-import {
-  addTaskAC,
-  changeTaskStatusAC,
-  changeTaskTitleAC,
-  removeTaskAC,
-  tasksReducer
-} from './tasks-reducer';
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
 import {addTodolistAC, removeTodolistAC} from "./todolist-reducer";
 import {TasksStateType} from "../components/App/App";
+import {TaskPriorities, TaskStatuses} from "../api/tasks-api";
 
 let startState: TasksStateType
 
 beforeEach(() => {
   startState = {
     'todoListId1': [
-      {id: '1', title: 'Sass 👽', isDone: true},
-      {id: '2', title: 'HTML & CSS 🤖', isDone: false},
-      {id: '3', title: 'React ⚛️', isDone: true},
-      {id: '4', title: 'Git 🤟', isDone: true},
-      {id: '5', title: 'Redux 🎮', isDone: false},
+      {id: '1', title: 'Sass 👽', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '2', title: 'HTML & CSS 🤖', status: TaskStatuses.New, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '3', title: 'React ⚛️', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '4', title: 'Git 🤟', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '5', title: 'Redux 🎮', status: TaskStatuses.New, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
     ],
     'todoListId2': [
-      {id: '1', title: 'Angular', isDone: true},
-      {id: '2', title: 'Python', isDone: false},
-      {id: '3', title: 'C#', isDone: true},
-      {id: '4', title: 'Xcode', isDone: true},
+      {id: '1', title: 'Angular', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
+      {id: '2', title: 'Python', status: TaskStatuses.New, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
+      {id: '3', title: 'C#', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
+      {id: '4', title: 'Xcode', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
     ],
   };
 })
@@ -36,16 +31,16 @@ test('correct task should be deleted from correct array', () => {
 
   expect(endState).toEqual({
     'todoListId1': [
-      {id: '1', title: 'Sass 👽', isDone: true},
-      {id: '2', title: 'HTML & CSS 🤖', isDone: false},
-      {id: '3', title: 'React ⚛️', isDone: true},
-      {id: '4', title: 'Git 🤟', isDone: true},
-      {id: '5', title: 'Redux 🎮', isDone: false},
+      {id: '1', title: 'Sass 👽', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '2', title: 'HTML & CSS 🤖', status: TaskStatuses.New, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '3', title: 'React ⚛️', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '4', title: 'Git 🤟', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
+      {id: '5', title: 'Redux 🎮', status: TaskStatuses.New, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId1', order: 0, addedDate: ''},
     ],
     'todoListId2': [
-      {id: '1', title: 'Angular', isDone: true},
-      {id: '3', title: 'C#', isDone: true},
-      {id: '4', title: 'Xcode', isDone: true},
+      {id: '1', title: 'Angular', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
+      {id: '3', title: 'C#', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
+      {id: '4', title: 'Xcode', status: TaskStatuses.Completed, description: '', priority: TaskPriorities.Low, startDate: '', deadline: '',  todoListId: 'todoListId2', order: 0, addedDate: ''},
     ],
   });
 });
@@ -58,17 +53,17 @@ test('correct task should be added to correct array', () => {
   expect(endState['todoListId2'].length).toBe(5);
   expect(endState['todoListId2'][0].id).toBeDefined();
   expect(endState['todoListId2'][0].title).toBe('Redux 🎮');
-  expect(endState['todoListId2'][0].isDone).toBe(false);
+  expect(endState['todoListId2'][0].status).toBe(TaskStatuses.New);
 })
 
 test('status of specified task should be changed', () => {
 
-  const endState = tasksReducer(startState, changeTaskStatusAC('todoListId2', "2", false))
+  const endState = tasksReducer(startState, changeTaskStatusAC('todoListId2', "2", TaskStatuses.New))
 
   expect(endState['todoListId1'].length).toBe(5);
   expect(endState['todoListId2'].length).toBe(4);
-  expect(endState['todoListId2'][1].isDone).toBe(false)
-  expect(endState['todoListId1'][1].isDone).toBe(false)
+  expect(endState['todoListId2'][1].status).toBe(TaskStatuses.New)
+  expect(endState['todoListId1'][1].status).toBe(TaskStatuses.New)
 });
 
 test('title of specified task should be changed', () => {
