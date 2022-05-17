@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {Todolist} from "../Todolist/Todolist";
 import {AddItemForm} from "../AddItemForm/AddItemForm";
@@ -7,12 +7,12 @@ import {Container, Grid, Paper} from "@mui/material";
 import {
   addTodolistAC,
   changeTodolistFilterAC,
-  changeTodolistTitleAC, FilterValueType,
+  changeTodolistTitleAC, fetchTodosTC, FilterValueType,
   removeTodolistAC, TodolistDomainType,
 } from "../../State/todolist-reducer";
-import {addTaskAC} from "../../State/tasks-reducer";
+import {addTaskAC, fetchTasksTC} from "../../State/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../State/Store";
+import {AppRootStateType, useTypedDispatch} from "../../State/Store";
 import {TaskType} from "../../api/tasks-api";
 
 export type TasksStateType = {
@@ -21,9 +21,13 @@ export type TasksStateType = {
 
 export function App() {
 
+  useEffect(() => {
+    dispatch(fetchTodosTC())
+  }, [])
+
   const todoLists = useSelector<AppRootStateType, TodolistDomainType[]>(state => state.todoLists);
   const tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks);
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const addTodoList = useCallback((newTodolistTitle: string) => {
     let action = addTodolistAC(newTodolistTitle)

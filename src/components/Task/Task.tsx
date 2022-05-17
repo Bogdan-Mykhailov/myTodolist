@@ -7,6 +7,7 @@ import {EditableSpan} from "../EditableSpan/EditableSpan";
 import {useDispatch} from "react-redux";
 import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "../../State/tasks-reducer";
 import {TaskStatuses, TaskType} from "../../api/tasks-api";
+import {useTypedDispatch} from "../../State/Store";
 
 export type TaskPropsType = {
   task: TaskType
