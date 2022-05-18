@@ -1,4 +1,4 @@
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from './tasks-reducer';
+import {addTaskAC, removeTaskAC, tasksReducer, updateTaskAC} from './tasks-reducer';
 import {addTodolistAC, removeTodolistAC} from "./todolist-reducer";
 import {TasksStateType} from "../components/App/App";
 import {TaskPriorities, TaskStatuses} from "../api/tasks-api";
@@ -58,7 +58,7 @@ test('correct task should be added to correct array', () => {
 
 test('status of specified task should be changed', () => {
 
-  const endState = tasksReducer(startState, changeTaskStatusAC('todoListId2', "2", TaskStatuses.New))
+  const endState = tasksReducer(startState, updateTaskAC('todoListId2', "2", {status: TaskStatuses.New}))
 
   expect(endState['todoListId1'].length).toBe(5);
   expect(endState['todoListId2'].length).toBe(4);
@@ -68,7 +68,7 @@ test('status of specified task should be changed', () => {
 
 test('title of specified task should be changed', () => {
 
-  const endState = tasksReducer(startState, changeTaskTitleAC('todoListId1', '2', 'REACT'))
+  const endState = tasksReducer(startState, updateTaskAC('todoListId1', '2', {title: 'REACT'}))
 
   expect(endState['todoListId1'][0].title).toBe('Sass 👽');
   expect(endState['todoListId1'][1].title).toBe('REACT');

@@ -20,6 +20,9 @@ type TodolistPropsType = {
   filter: FilterValueType
   removeTodoLists: (todoListId: string) => void
   changeTodolistTitleHandler: (todoListId: string, newTitle: string) => void
+  removeTask: (todoListId: string, taskId: string) => void
+  changeTaskTitle: (todoListId: string, taskId: string, newTitle: string) => void
+  changeTaskStatus: (todoListId: string, taskId: string, status: TaskStatuses) => void
 }
 
 export const Todolist = React.memo((props: TodolistPropsType) => {
@@ -76,6 +79,9 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
                 key={i.id}
                 task={i}
                 todoListId={props.id}
+                removeTask={props.removeTask}
+                changeTaskTitle={props.changeTaskTitle}
+                changeTaskStatus={props.changeTaskStatus}
               />
             )
           })

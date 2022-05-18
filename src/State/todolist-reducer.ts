@@ -1,7 +1,7 @@
 import {v1} from "uuid";
-import {todolistApi, TodolistType} from "../api/todolist-api";
+import {ResponseType, todolistApi, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
-import {AppRootStateType} from "./Store";
+import {AxiosResponse} from "axios";
 
 
 type TodolistReducerType =
@@ -107,3 +107,25 @@ export const fetchTodosTC = () => (dispatch: Dispatch) => {
       dispatch(setTodosAC(res.data))
     })
 }
+
+export const removeTodoListTC = (todoListId: string) => (dispatch: Dispatch) => {
+  todolistApi.deleteTodolists(todoListId)
+    .then((res) => {
+      dispatch(removeTodolistAC(todoListId))
+    })
+}
+
+export const addTodoListTC = (title: string) => (dispatch: Dispatch) => {
+  todolistApi.createTodolists(title)
+    .then((res) => {
+      dispatch(addTodolistAC(title))
+    })
+}
+
+export const changeTodolistTitleTC = (todoListId: string, title: string) => (dispatch: Dispatch) => {
+  todolistApi.updateTodolists(todoListId, title)
+    .then((res) => {
+      dispatch(changeTodolistTitleAC(todoListId, title))
+    })
+}
+

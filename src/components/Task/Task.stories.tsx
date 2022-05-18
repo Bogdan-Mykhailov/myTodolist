@@ -15,13 +15,13 @@ export default {
 
 } as ComponentMeta<typeof Task>;
 
-const TaskUsingRedux = () => {
-  const task = useSelector<AppRootStateType, TaskType>(state => state.tasks['todoListId1'][3])
-  return <Task task={task} todoListId={'todoListId1'}/>
-}
+// const TaskUsingRedux = () => {
+//   const task = useSelector<AppRootStateType, TaskType>(state => state.tasks['todoListId1'][3])
+//   return <Task task={task} todoListId={'todoListId1'} changeTaskTitle={} changeTaskStatus={changeTaskStatus} removeTask={removeTask}/>
+// }
+//
+// const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux />;
 
-const Template: ComponentStory<typeof TaskUsingRedux> = () => <TaskUsingRedux />;
+// export const TaskIsDoneStory = Template.bind({});
 
-export const TaskIsDoneStory = Template.bind({});
-
-TaskIsDoneStory.args = {}
+// TaskIsDoneStory.args = {}

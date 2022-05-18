@@ -1,11 +1,6 @@
+import {ResponseType} from "./todolist-api";
 import axios from "axios";
 
-type CommonResponseType<T = {}> = {
-  fieldsErrors: string[]
-  resultCode: number
-  messages: string[]
-  data: T
-}
 export enum TaskStatuses {
   New = 0,
   InProgress = 1,
@@ -59,13 +54,13 @@ export const tasksApi = {
     return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
   },
   createTasks(todolistId: string, title: string) {
-    return instance.post<CommonResponseType>(`todo-lists/${todolistId}/tasks`, {title})
+    return instance.post<{title: string}, ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks`, {title})
   },
   deleteTasks(todolistId: string, taskId: string) {
-    return instance.delete<CommonResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    return instance.delete<GetTasksResponse>(`todo-lists/${todolistId}/tasks/${taskId}`)
   },
-  updateTasks(todolistId: string, taskId: string, title: string) {
-    return instance.put<CommonResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+  updateTasks(todolistId: string, taskId: string, model: UpdateTaskModelType) {
+    return instance.put<UpdateTaskModelType, ResponseType<{item: TaskType}>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
   }
 }
 
