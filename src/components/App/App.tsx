@@ -5,17 +5,15 @@ import {AddItemForm} from "../AddItemForm/AddItemForm";
 import {ButtonAppBar} from "../ButtonAppBar/ButtonAppBar";
 import {Container, Grid, Paper} from "@mui/material";
 import {
-  addTodolistAC, addTodoListTC,
+  addTodoListTC,
   changeTodolistFilterAC,
-  changeTodolistTitleAC, changeTodolistTitleTC,
-  fetchTodosTC, FilterValueType,
-  removeTodolistAC, removeTodoListTC, TodolistDomainType,
+  changeTodolistTitleTC,
+  fetchTodosTC,
+  FilterValueType,
+  removeTodoListTC,
+  TodolistDomainType,
 } from "../../State/todolist-reducer";
-import {
-  addTaskTC,
-  removeTaskTC,
-  updateTaskTC
-} from "../../State/tasks-reducer";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "../../State/tasks-reducer";
 import {useSelector} from "react-redux";
 import {AppRootStateType, useTypedDispatch} from "../../State/Store";
 import {TaskStatuses, TaskType} from "../../api/tasks-api";
@@ -60,7 +58,7 @@ export function App() {
     dispatch(updateTaskTC(todoListId, taskId, {title: newTitle}))
   }, [dispatch])
   const changeTaskStatus = useCallback((todoListId: string, taskId: string, status: TaskStatuses) => {
-    dispatch(updateTaskTC(todoListId, taskId, {status}))
+    dispatch(updateTaskTC(todoListId, taskId, {status: status}))
   }, [dispatch])
 
   return (

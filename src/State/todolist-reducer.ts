@@ -1,8 +1,5 @@
-import {v1} from "uuid";
-import {ResponseType, todolistApi, TodolistType} from "../api/todolist-api";
+import {todolistApi, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
-import {AxiosResponse} from "axios";
-
 
 type TodolistReducerType =
   RemoveTodolistACType |
@@ -58,12 +55,12 @@ export const removeTodolistAC = (todoListId1: string) => {
 }
 
 export type AddTodolistACType = ReturnType<typeof addTodolistAC>
-export const addTodolistAC = (newTodolistTitle: string) => {
+export const addTodolistAC = (newTodolistTitle: string, todoId: string) => {
   return {
     type: 'ADD-TODOLIST',
     payload: {
       title: newTodolistTitle,
-      todolistId: v1()
+      todolistId: todoId
     }
   } as const
 }
@@ -107,21 +104,18 @@ export const fetchTodosTC = () => (dispatch: Dispatch) => {
       dispatch(setTodosAC(res.data))
     })
 }
-
 export const removeTodoListTC = (todoListId: string) => (dispatch: Dispatch) => {
   todolistApi.deleteTodolists(todoListId)
     .then((res) => {
       dispatch(removeTodolistAC(todoListId))
     })
 }
-
 export const addTodoListTC = (title: string) => (dispatch: Dispatch) => {
   todolistApi.createTodolists(title)
     .then((res) => {
-      dispatch(addTodolistAC(title))
+      dispatch(addTodolistAC(title, res.data.data.item.id))
     })
 }
-
 export const changeTodolistTitleTC = (todoListId: string, title: string) => (dispatch: Dispatch) => {
   todolistApi.updateTodolists(todoListId, title)
     .then((res) => {

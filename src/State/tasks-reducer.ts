@@ -35,7 +35,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
     }
     case 'ADD-TASK': {
       const newTask = {
-        id: v1(),
+        id: action.payload.taskId,
         title: action.payload.title,
         status: TaskStatuses.New,
         description: '',
@@ -99,12 +99,13 @@ export const removeTaskAC = (todoListId: string, taskId: string) => {
 }
 
 export type AddTaskACType = ReturnType<typeof addTaskAC>
-export const addTaskAC = (todoListId: string, title: string) => {
+export const addTaskAC = (todoListId: string, title: string, taskId: string) => {
   return {
     type: 'ADD-TASK',
     payload: {
       title,
       todoListId,
+      taskId
     }
   } as const
 }
@@ -146,10 +147,10 @@ export const removeTaskTC = (todoListId: string, taskId: string) => (dispatch: D
     })
 }
 
-export const addTaskTC = (todoListId: string, taskId: string) => (dispatch: Dispatch) => {
-  tasksApi.createTasks(todoListId, taskId)
+export const addTaskTC = (todoListId: string, title: string) => (dispatch: Dispatch) => {
+  tasksApi.createTasks(todoListId, title)
     .then((res) => {
-      dispatch(addTaskAC(todoListId, taskId))
+      dispatch(addTaskAC(todoListId, res.data.data.item.title, res.data.data.item.id))
     })
 }
 
@@ -171,7 +172,7 @@ export const updateTaskTC = (todoListId: string, taskId: string, domainModel: Up
   }
   tasksApi.updateTasks(todoListId, taskId, apiModel)
     .then((res) => {
-      dispatch(updateTaskAC(todoListId, taskId, domainModel))
+      dispatch(updateTaskAC(todoListId, res.data.data.item.id, domainModel))
     })
 }
 
