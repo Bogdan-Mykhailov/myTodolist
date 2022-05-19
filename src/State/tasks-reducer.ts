@@ -1,4 +1,3 @@
-import {v1} from "uuid";
 import {AddTodolistACType, RemoveTodolistACType, SetTodosACType} from "./todolist-reducer";
 import {TasksStateType} from "../components/App/App";
 import {TaskPriorities, tasksApi, TaskStatuses, TaskType, UpdateTaskModelType} from "../api/tasks-api";
@@ -92,8 +91,8 @@ export const removeTaskAC = (todoListId: string, taskId: string) => {
   return {
     type: 'REMOVE-TASK',
     payload: {
-      taskId,
-      todoListId
+      todoListId,
+      taskId
     }
   } as const
 }
@@ -103,8 +102,8 @@ export const addTaskAC = (todoListId: string, title: string, taskId: string) => 
   return {
     type: 'ADD-TASK',
     payload: {
-      title,
       todoListId,
+      title,
       taskId
     }
   } as const
@@ -155,8 +154,8 @@ export const addTaskTC = (todoListId: string, title: string) => (dispatch: Dispa
 }
 
 export const updateTaskTC = (todoListId: string, taskId: string, domainModel: UpdateDomainTaskModelType) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
-  const state = getState()
-  const task = state.tasks[todoListId].find(t => t.id === taskId)
+  const state = getState().tasks
+  const task = state[todoListId].find(t => t.id === taskId)
   if (!task) {
     console.warn('Task not found in the state')
     return
@@ -172,7 +171,8 @@ export const updateTaskTC = (todoListId: string, taskId: string, domainModel: Up
   }
   tasksApi.updateTasks(todoListId, taskId, apiModel)
     .then((res) => {
-      dispatch(updateTaskAC(todoListId, res.data.data.item.id, domainModel))
+
+      dispatch(updateTaskAC(todoListId, taskId, domainModel))
     })
 }
 
