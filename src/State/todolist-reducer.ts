@@ -2,11 +2,16 @@ import {todolistApi, TodolistType} from "../api/todolist-api";
 import {Dispatch} from "redux";
 
 type TodolistReducerType =
-  RemoveTodolistACType |
-  AddTodolistACType |
-  ChangeTodolistTitleACType |
-  ChangeTodolistFilterACType |
-  SetTodosACType
+  | ReturnType<typeof removeTodolistAC>
+  | ReturnType<typeof addTodolistAC>
+  | ReturnType<typeof changeTodolistTitleAC>
+  | ReturnType<typeof changeTodolistFilterAC>
+  | ReturnType<typeof setTodosAC>
+
+export type FilterValueType = 'all' | 'active' | 'completed'
+export type TodolistDomainType = TodolistType & {
+  filter: FilterValueType
+}
 
 const REMOVE_TODOLIST = 'REMOVE-TODOLIST'
 const ADD_TODOLIST = 'ADD-TODOLIST'
@@ -14,12 +19,7 @@ const CHANGE_TODOLIST_TITLE = 'CHANGE-TODOLIST-TITLE'
 const CHANGE_TODOLIST_FILTER = 'CHANGE-TODOLIST-FILTER'
 const SET_TODOS = 'SET-TODOS'
 
-
-export type FilterValueType = 'all' | 'active' | 'completed'
 const initialState: TodolistDomainType[] = []
-export type TodolistDomainType = TodolistType & {
-  filter: FilterValueType
-}
 
 export const todolistReducer = (state: TodolistDomainType[] = initialState, action: TodolistReducerType): TodolistDomainType[] => {
   switch (action.type) {
@@ -52,58 +52,11 @@ export const todolistReducer = (state: TodolistDomainType[] = initialState, acti
   }
 }
 
-export type RemoveTodolistACType = ReturnType<typeof removeTodolistAC>
-export const removeTodolistAC = (todoListId1: string) => {
-  return {
-    type: REMOVE_TODOLIST,
-    payload: {
-      id: todoListId1
-    }
-  } as const
-}
-
-export type AddTodolistACType = ReturnType<typeof addTodolistAC>
-export const addTodolistAC = (title: string, todolistId: string) => {
-  return {
-    type: ADD_TODOLIST,
-    payload: {
-      title,
-      todolistId
-    }
-  } as const
-}
-
-export type ChangeTodolistTitleACType = ReturnType<typeof changeTodolistTitleAC>
-export const changeTodolistTitleAC = (todoListId: string, title: string) => {
-  return {
-    type: CHANGE_TODOLIST_TITLE,
-    payload: {
-      todoListId,
-      title
-    }
-  } as const
-}
-
-export type ChangeTodolistFilterACType = ReturnType<typeof changeTodolistFilterAC>
-export const changeTodolistFilterAC = (todoListId: string, filter: FilterValueType) => {
-  return {
-    type: CHANGE_TODOLIST_FILTER,
-    payload: {
-      todoListId,
-      filter
-    }
-  } as const
-}
-
-export type SetTodosACType = ReturnType<typeof setTodosAC>
-export const setTodosAC = (todos: TodolistType[]) => {
-  return {
-    type: SET_TODOS,
-    payload: {
-      todos,
-    }
-  } as const
-}
+export const removeTodolistAC = (todoListId1: string) => ({type: REMOVE_TODOLIST, payload: {id: todoListId1}}) as const
+export const addTodolistAC = (title: string, todolistId: string) => ({type: ADD_TODOLIST, payload: {title, todolistId}}) as const
+export const changeTodolistTitleAC = (todoListId: string, title: string) => ({type: CHANGE_TODOLIST_TITLE, payload: {todoListId, title}}) as const
+export const changeTodolistFilterAC = (todoListId: string, filter: FilterValueType) => ({type: CHANGE_TODOLIST_FILTER, payload: {todoListId, filter}}) as const
+export const setTodosAC = (todos: TodolistType[]) => ({type: SET_TODOS, payload: {todos}}) as const
 
 // thunk
 export const fetchTodosTC = () => (dispatch: Dispatch) => {
