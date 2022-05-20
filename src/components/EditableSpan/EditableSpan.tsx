@@ -24,7 +24,7 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
 
   const onKeyPressInputHandler = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
-      activateViewMode();
+      setEditMode(false);
     }
   };
 
