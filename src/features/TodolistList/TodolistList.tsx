@@ -54,45 +54,46 @@ export const TodoListList: React.FC = () => {
   }, [])
 
   return <>
-      <Grid container style={{padding: '20px'}}>
-        <AddItemForm addItem={addTodoList}/>
-      </Grid>
-      <Grid container spacing={3}>
+    <Grid container style={{padding: '20px'}}>
+      <AddItemForm addItem={addTodoList}/>
+    </Grid>
+    <Grid container spacing={3}>
 
-        {todoLists.map((tl) => {
+      {todoLists.map((tl) => {
 
-          return (
-            <Grid item key={tl.id}>
-              <Paper
-                style={{
-                  maxWidth: '244px',
-                  wordWrap: 'break-word',
-                  padding: '20px',
-                  fontFamily: 'Museo Sans Cyrl',
-                  fontWeight: '300',
-                  fontSize: '18px',
-                  background: 'linear-gradient(45deg, #F2B56B 40%, #253759 190%)',
-                  color: '#013A40'
-                }}
-                elevation={6}>
-                <Todolist
-                  title={tl.title}
-                  id={tl.id}
-                  tasks={tasks[tl.id]}
-                  addTask={addTask}
-                  changeFilter={changeTodolistFilter}
-                  filter={tl.filter}
-                  removeTodoLists={removeTodoList}
-                  changeTodolistTitleHandler={changeTodolistTitle}
-                  removeTask={removeTask}
-                  changeTaskTitle={changeTaskTitle}
-                  changeTaskStatus={changeTaskStatus}
-                />
-              </Paper>
-            </Grid>
-          )
-        })
-        }
-      </Grid>
-    </>
+        return (
+          <Grid item key={tl.id}>
+            <Paper
+              style={{
+                maxWidth: '244px',
+                wordWrap: 'break-word',
+                padding: '20px',
+                fontFamily: 'Museo Sans Cyrl',
+                fontWeight: '300',
+                fontSize: '18px',
+                background: 'linear-gradient(45deg, #F2B56B 40%, #253759 190%)',
+                color: '#013A40'
+              }}
+              elevation={6}>
+              <Todolist
+                title={tl.title}
+                id={tl.id}
+                tasks={tasks[tl.id]}
+                filter={tl.filter}
+                entityStatus={tl.entityStatus}
+                addTask={addTask}
+                changeFilter={changeTodolistFilter}
+                removeTodoLists={removeTodoList}
+                changeTodolistTitleHandler={changeTodolistTitle}
+                removeTask={removeTask}
+                changeTaskTitle={changeTaskTitle}
+                changeTaskStatus={changeTaskStatus}
+              />
+            </Paper>
+          </Grid>
+        )
+      })
+      }
+    </Grid>
+  </>
 }

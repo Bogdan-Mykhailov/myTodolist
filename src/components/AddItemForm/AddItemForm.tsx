@@ -5,6 +5,7 @@ import {TextField} from "@mui/material";
 
 export type AddItemFormPropsType = {
   addItem: (title: string) => void
+  disabled?: boolean
 }
 
 export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
@@ -41,24 +42,19 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
           className={error ? classes.error : ''}
           error={!!error}
           size={"small"}
-          sx={{
-            maxWidth: '180px',
-            minWidth: '180px',
-          }}/>
+          sx={{maxWidth: '180px', minWidth: '180px',}}
+          disabled={props.disabled}
+        />
 
         <Button variant="text"
                 onClick={onClickAddTaskButtonHandler}
+                disabled={props.disabled}
                 sx={{
-                  fontSize: '18px',
-                  fontFamily: 'Museo Sans Cyrl',
-                  fontWeight: '400',
-                  fontStyle: 'italic',
-                  color: '#253759'
+                  fontSize: '18px', fontFamily: 'Museo Sans Cyrl',
+                  fontWeight: '400', fontStyle: 'italic', color: '#253759'
                 }}>Add</Button>
-        {error && <div style={{
-          fontFamily: 'Museo Sans Cyrl',
-          fontWeight: '300',
-        }} className={classes.errorMessage}>Title is required</div>}
+        {error && <div style={{fontFamily: 'Museo Sans Cyrl', fontWeight: '300',}}
+                       className={classes.errorMessage}>Title is required</div>}
       </div>
     </div>
   )
