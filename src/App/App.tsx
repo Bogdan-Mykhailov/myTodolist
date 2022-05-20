@@ -15,7 +15,9 @@ export const App = () => {
   return (
     <div className={classes.App}>
       <ButtonAppBar/>
-      {status === 'loading' && <LinearProgress color="inherit" style={{color: '#253759'}}/>}
+      <div style={{height: '5px'}}>
+        {status === 'loading' && <LinearProgress color="inherit" style={{color: '#253759'}}/>}
+      </div>
       <Container fixed>
         <TodoListList/>
         <ErrorSnackbar/>

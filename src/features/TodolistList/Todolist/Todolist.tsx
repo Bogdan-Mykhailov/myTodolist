@@ -79,7 +79,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
       <div>
         {
           tasksFiltered.map((i) => {
-
             return (
               <Task
                 key={i.id}
