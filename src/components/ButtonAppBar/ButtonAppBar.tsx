@@ -40,9 +40,9 @@ export const ButtonAppBar = () => {
                     color: '#F2B56B',
                     fontFamily: 'Museo Sans Cyrl',
                     fontWeight: '900',
-                    fontSize: '18px'
+                    fontSize: '15px'
                   }}>
-            Login
+            Logout
           </Button>
         </Toolbar>
       </AppBar>
