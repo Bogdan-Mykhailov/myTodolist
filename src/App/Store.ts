@@ -22,11 +22,7 @@ window.store = store;
 
 // Types
 export type AppDispatch = typeof store.dispatch;
-
 export type TypedDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>;
-export type TypedThunk<ReturnType = void> = ThunkAction<ReturnType,
-  AppRootStateType,
-  unknown,
-  AnyAction>;
+export type TypedThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>;
 export const useTypedDispatch = () => useDispatch<TypedDispatch>();
 export const useTypedSelector: TypedUseSelectorHook<AppRootStateType> = useSelector;
