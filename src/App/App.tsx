@@ -3,10 +3,11 @@ import classes from './App.module.css'
 import {ButtonAppBar} from "../components/ButtonAppBar/ButtonAppBar";
 import Container from "@mui/material/Container";
 import LinearProgress from "@mui/material/LinearProgress";
-import {TodoListList} from "../features/TodolistList/TodolistList";
 import {useTypedSelector} from "./Store";
 import {RequestStatusType} from "./app-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import {HashRouter} from "react-router-dom";
+import {Routs} from "../features/Routes/Routs";
 
 export const App = () => {
 
@@ -19,7 +20,7 @@ export const App = () => {
         {status === 'loading' && <LinearProgress color="inherit" style={{color: '#253759'}}/>}
       </div>
       <Container fixed>
-        <TodoListList/>
+        <Routs/>
         <ErrorSnackbar/>
       </Container>
     </div>
