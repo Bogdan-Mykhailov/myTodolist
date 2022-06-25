@@ -2,6 +2,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 const APP_SET_STATUS = 'APP/SET-STATUS'
 const APP_SET_ERROR = 'APP/SET-ERROR'
+
 const initialState = {
   status: 'loading' as RequestStatusType,
   error: null as string | null
