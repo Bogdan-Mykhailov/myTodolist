@@ -3,12 +3,10 @@ import {
   changeTodolistTitleTC,
   fetchTodosTC, FilterValueType,
   removeTodoListTC,
-  TodolistDomainType
 } from "../../02-BLL/todolist-reducer";
 import React, {useCallback, useEffect} from "react";
-import {useSelector} from "react-redux";
-import {AppRootStateType, useTypedDispatch, useTypedSelector} from "../../02-BLL/Store";
-import {addTaskTC, removeTaskTC, TasksStateType, updateTaskTC} from "../../02-BLL/tasks-reducer";
+import {useTypedDispatch, useTypedSelector} from "../../02-BLL/Store";
+import {addTaskTC, removeTaskTC, updateTaskTC} from "../../02-BLL/tasks-reducer";
 import {TaskStatuses} from "../../03-DAL/tasks-api";
 import {Grid, Paper} from "@mui/material";
 import {AddItemForm} from "../../01-components/AddItemForm/AddItemForm";
@@ -42,7 +40,7 @@ export const TodoListList: React.FC = () => {
     dispatch(changeTodolistTitleTC(todoListId, newTitle))
   }, [])
   const changeTodolistFilter = useCallback((todoListId: string, value: FilterValueType) => {
-    dispatch(changeTodolistFilterAC(todoListId, value))
+    dispatch(changeTodolistFilterAC({todoListId, filter: value}))
   }, [])
   const addTask = useCallback((todoListId: string, title: string) => {
     dispatch(addTaskTC(todoListId, title))
