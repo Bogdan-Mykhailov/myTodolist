@@ -83,7 +83,6 @@ export const logoutTC = () => (dispatch: Dispatch) => {
     })
 }
 
-
 //types
 type AuthActionsType =
   | ReturnType<typeof loginAC>
