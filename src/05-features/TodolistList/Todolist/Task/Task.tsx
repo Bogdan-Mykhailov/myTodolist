@@ -3,7 +3,7 @@ import classes from "../Todolist.module.css";
 import {IconButton} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
-import {EditableSpan} from "../../../../01-components/EditableSpan/EditableSpan";
+import {EditableSpan} from "../../../../01-UI/01-components/EditableSpan/EditableSpan";
 import {TaskStatuses, TaskType} from "../../../../03-DAL/tasks-api";
 
 export type TaskPropsType = {
@@ -37,16 +37,18 @@ export const Task = React.memo((props: TaskPropsType) => {
   return (
     <div key={props.task.id}
          className={props.task.status === TaskStatuses.Completed ? classes.isDone : ''}>
-      <Checkbox {...label}
-                checked={props.task.status === TaskStatuses.Completed}
-                onChange={changeStatusHandler}
-                size="small"
-                color='default'
-                sx={{color: '#F2E7AC'}}/>
-      <EditableSpan title={props.task.title} onChange={changeTitleHandler}/>
-      <IconButton aria-label="delete" onClick={removeTasksButtonHandler}>
-        <DeleteIcon sx={{color: '#F2E7AC'}}/>
-      </IconButton>
+      <div className={classes.taskWrapper}>
+        <Checkbox {...label}
+                  checked={props.task.status === TaskStatuses.Completed}
+                  onChange={changeStatusHandler}
+                  size="small"
+                  color='default'
+                  sx={{color: '#F2E7AC'}}/>
+        <div className={classes.editedSpan}><EditableSpan title={props.task.title} onChange={changeTitleHandler}/></div>
+        <IconButton aria-label="delete" onClick={removeTasksButtonHandler}>
+          <DeleteIcon sx={{color: '#F2E7AC'}}/>
+        </IconButton>
+      </div>
     </div>
   );
 });

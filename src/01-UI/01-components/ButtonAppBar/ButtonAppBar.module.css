@@ -1,0 +1,15 @@
+.imgWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.logoImg {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  transition: all 0.5s ease;
+}
+
+.logoImg:hover {
+  transform: scale(1.3);
+}

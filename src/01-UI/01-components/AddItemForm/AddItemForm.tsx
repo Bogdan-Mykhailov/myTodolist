@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import classes from "../../05-features/TodolistList/Todolist/Todolist.module.css";
+import classes from "../../../05-features/TodolistList/Todolist/Todolist.module.css";
 import Button from '@mui/material/Button';
 import {TextField} from "@mui/material";
 
@@ -42,19 +42,34 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
           className={error ? classes.error : ''}
           error={!!error}
           size={"small"}
-          sx={{maxWidth: '180px', minWidth: '180px',}}
+          sx={{
+            width: '210px'}}
           disabled={props.disabled}
         />
 
-        <Button variant="text"
+        <Button variant="contained"
                 onClick={onClickAddTaskButtonHandler}
                 disabled={props.disabled}
                 sx={{
-                  fontSize: '18px', fontFamily: 'Museo Sans Cyrl',
-                  fontWeight: '400', fontStyle: 'italic', color: '#253759'
+                  marginLeft: '10px',
+                  width: '40px',
+                  height: '40px',
+                  fontSize: '15px',
+                  fontWeight: '300',
+                  fontStyle: 'italic',
+                  color: '#F2B56B',
+                  background: '#253759',
+                  transition: 'all 0.5s ease',
+                  '&:hover': {
+                    transform: 'scale(1.03)',
+                    background: '#253759'
+                  }
                 }}>Add</Button>
-        {error && <div style={{fontFamily: 'Museo Sans Cyrl', fontWeight: '300',}}
-                       className={classes.errorMessage}>Title is required</div>}
+        {
+          error && <div style={{fontWeight: '300',}}
+                        className={classes.errorMessage}
+            >Title is required</div>
+        }
       </div>
     </div>
   )

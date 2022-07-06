@@ -1,0 +1,12 @@
+.logo {
+  height: 120px;
+  width: 120px;
+  margin: 0 auto 10px auto;
+}
+
+.hr {
+  border: none;
+  border-radius: 2px;
+  height: 1px;
+  background: #253759;
+}

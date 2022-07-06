@@ -9,10 +9,11 @@ import {useTypedDispatch, useTypedSelector} from "../../02-BLL/Store";
 import {addTaskTC, removeTaskTC, updateTaskTC} from "../../02-BLL/tasks-reducer";
 import {TaskStatuses} from "../../03-DAL/tasks-api";
 import {Grid, Paper} from "@mui/material";
-import {AddItemForm} from "../../01-components/AddItemForm/AddItemForm";
+import {AddItemForm} from "../../01-UI/01-components/AddItemForm/AddItemForm";
 import {Todolist} from "./Todolist/Todolist";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../Routes/Routs";
+import s from './TodolistList.module.css'
 
 export const TodoListList: React.FC = () => {
 
@@ -56,45 +57,40 @@ export const TodoListList: React.FC = () => {
   }, [])
 
   return <>
-    <Grid container style={{padding: '20px'}}>
+    <Grid
+      container
+      className={s.gridContainerWrapper}
+    >
       <AddItemForm addItem={addTodoList}/>
     </Grid>
-    <Grid container spacing={3}>
-
-      {todoLists.map((tl) => {
-
-        return (
-          <Grid item key={tl.id}>
-            <Paper
-              style={{
-                maxWidth: '244px',
-                wordWrap: 'break-word',
-                padding: '20px',
-                fontFamily: 'Museo Sans Cyrl',
-                fontWeight: '300',
-                fontSize: '18px',
-                background: 'linear-gradient(45deg, #F2B56B 40%, #253759 190%)',
-                color: '#013A40'
-              }}
-              elevation={6}>
-              <Todolist
-                title={tl.title}
-                id={tl.id}
-                tasks={tasks[tl.id]}
-                filter={tl.filter}
-                entityStatus={tl.entityStatus}
-                addTask={addTask}
-                changeFilter={changeTodolistFilter}
-                removeTodoLists={removeTodoList}
-                changeTodolistTitleHandler={changeTodolistTitle}
-                removeTask={removeTask}
-                changeTaskTitle={changeTaskTitle}
-                changeTaskStatus={changeTaskStatus}
-              />
-            </Paper>
-          </Grid>
-        )
-      })
+    <Grid
+      container
+      spacing={4}
+    >
+      {
+        todoLists.map((tl) => {
+          return (
+            <Grid item key={tl.id}>
+              <Paper className={s.gridItemWrapper}
+                     elevation={7}>
+                <Todolist
+                  title={tl.title}
+                  id={tl.id}
+                  tasks={tasks[tl.id]}
+                  filter={tl.filter}
+                  entityStatus={tl.entityStatus}
+                  addTask={addTask}
+                  changeFilter={changeTodolistFilter}
+                  removeTodoLists={removeTodoList}
+                  changeTodolistTitleHandler={changeTodolistTitle}
+                  removeTask={removeTask}
+                  changeTaskTitle={changeTaskTitle}
+                  changeTaskStatus={changeTaskStatus}
+                />
+              </Paper>
+            </Grid>
+          )
+        })
       }
     </Grid>
   </>

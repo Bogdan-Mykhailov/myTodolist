@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import Box from '@mui/material/Box';
 import {Input} from "@mui/material";
+import s from './EditableSpan.module.css'
 
 type EditableSpanPropsType = {
   title: string
@@ -37,24 +38,30 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
       ? <Box
         component="form"
         sx={{
-          '& > :not(style)': {m: 1},
-          color: 'white',
+          '& > :not(style)': {m: -1},
+          color: '#F2B56B',
         }}
         noValidate
         autoComplete="off"
       >
-        <Input
-          onKeyPress={onKeyPressInputHandler}
-          color="warning"
-          onBlur={activateViewMode}
-          onChange={onChangeTitleHandler}
-          value={title}
-          autoFocus
-        />
+        <div className={s.inputWrapper}>
+          <Input
+            onKeyPress={onKeyPressInputHandler}
+            color='warning'
+            sx={{
+              color: "#253759",
+              width: '190px',
+              fontSize: '17px',
+              marginLeft: '12px',
+            }}
+            onBlur={activateViewMode}
+            onChange={onChangeTitleHandler}
+            value={title}
+            autoFocus
+          />
+        </div>
       </Box>
-      : <span
-        onDoubleClick={activeEditMode}
-      >{props.title}</span>
+      : <span onDoubleClick={activeEditMode}>{props.title}</span>
   );
 };
 

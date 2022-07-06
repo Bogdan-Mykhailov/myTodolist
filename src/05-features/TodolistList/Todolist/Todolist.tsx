@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 import classes from './Todolist.module.css'
-import {AddItemForm} from "../../../01-components/AddItemForm/AddItemForm";
-import {EditableSpan} from "../../../01-components/EditableSpan/EditableSpan";
+import {AddItemForm} from "../../../01-UI/01-components/AddItemForm/AddItemForm";
+import {EditableSpan} from "../../../01-UI/01-components/EditableSpan/EditableSpan";
 import {IconButton} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from "@mui/material/Button";
@@ -93,28 +93,64 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
         }
       </div>
 
-      <div>
+      <div className={classes.buttonGroup}>
         <Button
           sx={{
-            fontFamily: 'Museo Sans Cyrl',
             fontStyle: 'italic',
+            margin: '2px',
+            height: '25px',
+            fontSize: '15px',
+            fontWeight: '300',
+
+            color: '#F2B56B',
+            background: '#253759',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              transform: 'scale(1.03)',
+              background: '#253759'
+            }
           }}
+          variant="contained"
           color='inherit'
           className={props.filter === 'all' ? classes.activeFilter : ''}
           onClick={() => onClickChangeFilterHandler('all')}>All</Button>
         <Button
           sx={{
-            fontFamily: 'Museo Sans Cyrl',
             fontStyle: 'italic',
+            margin: '3px 2px',
+            height: '25px',
+            fontSize: '15px',
+            fontWeight: '300',
+
+            color: '#F2B56B',
+            background: '#253759',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              transform: 'scale(1.03)',
+              background: '#253759'
+            }
           }}
+          variant="contained"
           color='inherit'
           className={props.filter === 'active' ? classes.activeFilter : ''}
           onClick={() => onClickChangeFilterHandler('active')}>Active</Button>
         <Button
           sx={{
-            fontFamily: 'Museo Sans Cyrl',
             fontStyle: 'italic',
+            margin: '2px',
+            height: '25px',
+            fontSize: '15px',
+            fontWeight: '300',
+
+            color: '#F2B56B',
+            background: '#253759',
+            transition: 'all 0.5s ease',
+            '&:hover': {
+              transform: 'scale(1.03)',
+              background: '#253759'
+            }
           }}
+          variant="contained"
           color='inherit'
           className={props.filter === 'completed' ? classes.activeFilter : ''}
           onClick={() => onClickChangeFilterHandler('completed')}>Completed</Button>

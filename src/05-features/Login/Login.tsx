@@ -12,6 +12,8 @@ import {useTypedDispatch, useTypedSelector} from "../../02-BLL/Store";
 import {loginTC} from "../../02-BLL/auth-reducer";
 import {useNavigate} from "react-router-dom";
 import {PATH} from "../Routes/Routs";
+import bad from '../../00-assets/Untitled-1.svg'
+import s from './Login.module.css'
 
 type FormikErrorsType = {
   email?: string
@@ -54,25 +56,35 @@ export const Login = () => {
   })
 
   /*если залогинился перенаправляет на TODO_LIST*/
-  {isLoggedIn && navigate(PATH.TODO_LIST)}
+  {
+    isLoggedIn && navigate(PATH.TODO_LIST)
+  }
 
   return (
     <Grid container justifyContent={'center'}>
-      <Grid item justifyContent={'center'}>
+      <Grid
+        sx={{
+          border: '1px solid black',
+          borderRadius: '7px',
+          marginTop: '20vh',
+          padding: '20px'
+        }}
+        item justifyContent={'center'}>
         <form onSubmit={formik.handleSubmit}>
           <FormControl>
-            <FormLabel>
-              <p>To log in get registered
-                <a href={'https://social-network.samuraijs.com/'}
-                   target={'_blank'}> here
-                </a>
+            <img className={s.logo} src={bad} alt="badLogo"/>
+            <FormLabel sx={{width: '300px', marginTop: '0px'}}>
+              <p>
+                To log in use test credentials:
+                <hr className={s.hr}/>
+                Email: free@samuraijs.com
+                <br/>
+                Password: free
               </p>
-              <p>or use common test account credentials:</p>
-              <p>Email: free@samuraijs.com</p>
-              <p>Password: free</p>
             </FormLabel>
             <FormGroup>
               <TextField
+                size='small'
                 label="Email"
                 margin="normal"
                 // name='email'
@@ -92,6 +104,7 @@ export const Login = () => {
                 type="password"
                 label="Password"
                 margin="normal"
+                size='small'
                 // name='password'
                 // onChange={formik.handleChange}
                 // value={formik.values.password}
@@ -107,7 +120,12 @@ export const Login = () => {
                   <div style={{color: 'red'}}>{formik.errors.password}</div>}
               <FormControlLabel
                 label={'Remember me'}
-                control={<Checkbox/>}
+                control={<Checkbox
+                  color='default'
+                  sx={{
+                    color: '#253759',
+                  }}/>}
+
                 checked={formik.values.rememberMe}
                 // name='rememberMe'
                 // onChange={formik.handleChange}
@@ -117,7 +135,19 @@ export const Login = () => {
                 /*вместо 3 строк кода можно написать одну такую*/
                 {...formik.getFieldProps('rememberMe')}
               />
-              <Button type={'submit'} variant={'contained'} color={'primary'}>
+              <Button type={'submit'}
+                      variant='contained'
+                      sx={{
+                        border: 'none',
+                        fontStyle: 'italic',
+                        color: '#F2B56B',
+                        background: '#253759',
+                        transition: 'all 0.5s ease',
+                        '&:hover': {
+                          transform: 'scale(1.01)',
+                          background: '#253759'
+                        }
+                      }}>
                 Login
               </Button>
             </FormGroup>

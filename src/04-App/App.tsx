@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import classes from './App.module.css'
-import {ButtonAppBar} from "../01-components/ButtonAppBar/ButtonAppBar";
+import {ButtonAppBar} from "../01-UI/01-components/ButtonAppBar/ButtonAppBar";
 import Container from "@mui/material/Container";
 import LinearProgress from "@mui/material/LinearProgress";
 import {useTypedDispatch, useTypedSelector} from "../02-BLL/Store";
-import {RequestStatusType} from "../02-BLL/app-reducer";
-import {ErrorSnackbar} from "../01-components/ErrorSnackbar/ErrorSnackbar";
+import {ErrorSnackbar} from "../01-UI/01-components/ErrorSnackbar/ErrorSnackbar";
 import {Routs} from "../05-features/Routes/Routs";
 import {initializeMeTC} from "../02-BLL/auth-reducer";
 

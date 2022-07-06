@@ -1,3 +1,18 @@
+.taskWrapper {
+  display: flex;
+  align-items: start;
+  max-width: 280px;
+}
+
+.editedSpan {
+  margin: 7px 15px 0 0;
+  width: 190px;
+}
+
+.buttonGroup {
+  margin-top: 5px;
+}
+
 .error {
   border: red 1px solid;
 }
