@@ -1,12 +1,18 @@
 .taskWrapper {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   max-width: 280px;
 }
 
 .editedSpan {
   margin: 7px 15px 0 0;
   width: 190px;
+}
+
+.titleWrapper {
+  display: flex;
+  color: #253759;
+  justify-content: flex-start;
 }
 
 .buttonGroup {

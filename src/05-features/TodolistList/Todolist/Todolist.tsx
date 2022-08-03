@@ -64,13 +64,26 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
   return (
     <div>
 
-      <h3>
-        <EditableSpan title={props.title} onChange={changeTodolistTitleHandler}/>
-        <IconButton aria-label="delete" onClick={onClickRemoveTodolistHandler}
-                    disabled={props.entityStatus === 'loading'}>
-          <DeleteIcon/>
-        </IconButton>
-      </h3>
+      <div className={classes.titleWrapper}>
+        <h3>
+          <EditableSpan title={props.title} onChange={changeTodolistTitleHandler}/>
+          <IconButton
+            sx={{
+              display: 'inline',
+              color: '#F2E7AC',
+              transition: 'all 0.5s ease',
+              '&:hover': {
+                background: 'transparent',
+                transform: 'scale(1.1)'
+              }
+            }}
+            aria-label="delete"
+            onClick={onClickRemoveTodolistHandler}
+            disabled={props.entityStatus === 'loading'}>
+            <DeleteIcon/>
+          </IconButton>
+        </h3>
+      </div>
       <AddItemForm
         addItem={addTask}
         disabled={props.entityStatus === 'loading'}
@@ -101,7 +114,6 @@ export const Todolist = React.memo((props: TodolistPropsType) => {
             height: '25px',
             fontSize: '15px',
             fontWeight: '300',
-
             color: '#F2B56B',
             background: '#253759',
             transition: 'all 0.5s ease',

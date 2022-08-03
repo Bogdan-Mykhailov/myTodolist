@@ -38,7 +38,7 @@ export const EditableSpan = (props: EditableSpanPropsType) => {
       ? <Box
         component="form"
         sx={{
-          '& > :not(style)': {m: -1},
+          '& > :not(style)': {marginTop: -1},
           color: '#F2B56B',
         }}
         noValidate
