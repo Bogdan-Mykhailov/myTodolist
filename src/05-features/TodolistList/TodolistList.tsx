@@ -1,7 +1,9 @@
 import {
-  addTodoListTC, changeTodolistFilterAC,
+  addTodoListTC,
+  changeTodolistFilterAC,
   changeTodolistTitleTC,
-  fetchTodosTC, FilterValueType,
+  fetchTodosTC,
+  FilterValueType,
   removeTodoListTC,
 } from "../../02-BLL/todolist-reducer";
 import React, {useCallback, useEffect} from "react";
@@ -44,10 +46,10 @@ export const TodoListList: React.FC = () => {
     dispatch(changeTodolistFilterAC({todoListId, filter: value}))
   }, [])
   const addTask = useCallback((todoListId: string, title: string) => {
-    dispatch(addTaskTC(todoListId, title))
+    dispatch(addTaskTC({todoListId, title}))
   }, [])
   const removeTask = useCallback((todoListId: string, taskId: string) => {
-    dispatch(removeTaskTC(todoListId, taskId))
+    dispatch(removeTaskTC({todoListId, taskId}))
   }, [])
   const changeTaskTitle = useCallback((todoListId: string, taskId: string, newTitle: string) => {
     dispatch(updateTaskTC(todoListId, taskId, {title: newTitle}))
